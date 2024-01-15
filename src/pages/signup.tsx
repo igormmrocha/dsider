@@ -35,10 +35,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="bg-blue-500 min-h-screen flex items-center justify-center">
+    <div className="bg-yellow-400 min-h-screen flex items-center justify-center">
       <div
-        className="rounded-lg border text-card-foreground shadow-sm mx-auto max-w-sm bg-white"
-        data-v0-t="card"
+        className="flex max-w-md flex-col gap-4"
       >
         <div className="flex flex-col p-6 pb-2 space-y-1">
           <h3 className="tracking-tight text-2xl font-bold">Sign up</h3>
