@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-white-400 min-h-screen flex items-center justify-center">
+    <div className="bg-green-300 min-h-screen flex items-center justify-center">
       <div className="flex max-w-md flex-col gap-4">
         <div className="flex justify-center">
           <div className="flex flex-col p-6 pb-2 space-y-1">
@@ -34,14 +34,14 @@ export default function Home() {
         <div className="p-6 pt-2">
           <div className="space-y-3">
             <button
-              className="text-white bg-blue-500 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-4 py-2 w-full"
+              className="text-black bg-purple-500 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-4 py-2 w-full"
               onClick={signInWithEmailAndPassword}
             >
               Enter without login
             </button>
             <button
               onClick={() => signIn("google")}
-              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full bg-blue-500 text-white"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full bg-purple-500 text-black"
             >
               Login with Google
             </button>

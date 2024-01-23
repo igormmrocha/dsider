@@ -24,12 +24,15 @@
     "flowbite-react": "^0.7.2",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
+    "lodash": "^4.17.21",
     "next": "14.0.0",
     "next-auth": "^4.24.4",
-    "openssl": "^2.0.0",
+    "node": "^21.2.0",
+    "npm": "^10.3.0",
     "react": "^18",
     "react-dom": "^18",
     "react-share": "^5.0.3",
+    "tailwind": "^4.0.0",
     "tw-elements": "^1.1.0"
   },
   "devDependencies": {

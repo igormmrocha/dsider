@@ -17,7 +17,7 @@ export default async function handler(_, res) {
         },
       },
       orderBy: { createdAt: 'desc' },
-      select: { id: true, userEmail: true, question: true, answer: true },
+      select: { id: true, userEmail: true, questionType:true, question: true, answer: true, possibleAnswers: true },
     });
 
     await prisma.$disconnect(); // Disconnect the Prisma client

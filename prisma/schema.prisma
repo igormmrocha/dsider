@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -57,9 +57,11 @@ model VerificationToken {
 }
 
 model Question {
-  id        Int      @id @default(autoincrement())
-  question  String
-  answer    String
-  createdAt DateTime @default(now())
-  userEmail String   
+  id             Int      @id @default(autoincrement())
+  question       String
+  answer         String
+  possibleAnswers String[]  // Array to store possible answers
+  createdAt      DateTime @default(now())
+  userEmail      String
+  questionType   String   @default("yesNo") // Add a default value
 }
