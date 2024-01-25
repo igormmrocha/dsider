@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Question" ADD COLUMN     "lastRefreshed" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;

@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
-  const { question, userEmail, questionType, possibleAnswers } = req.body;
+  const { question, userEmail, questionType, possibleAnswers, refreshTime } = req.body;
 
   if (!question.trim() || !userEmail || !questionType) {
     return res.status(400).json({ error: 'Invalid data' });
@@ -26,7 +26,12 @@ export default async function handler(req, res) {
     } else {
       return res.status(400).json({ error: 'At least two possible answers, each with a maximum of 40 characters, are required for Multiple Choice questions.' });
     }
-  } else {
+  } 
+  else if (questionType === 'qrCode') {
+    newAnswer = null;
+  } 
+  
+  else{
     return res.status(400).json({ error: 'Invalid question type or missing possible answers for Multiple Choice questions.' });
   }
 
@@ -39,6 +44,7 @@ export default async function handler(req, res) {
         possibleAnswers: questionType === 'multipleChoice' ? { set: possibleAnswers.split(',').map(answer => answer.trim()) } : { set: [] },
         userEmail: userEmail,
         createdAt: new Date(),
+        refreshTime: refreshTime
       },
     });
 

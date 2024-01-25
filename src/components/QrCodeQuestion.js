@@ -4,22 +4,23 @@ import React, { useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
 import download from 'downloadjs';
 import Logo from '../logo/logo.png';
+import QRCode from 'qrcode.react';
 
-const RecentQuestions = ( {userEmail}) => {
-  const [recentQuestions, setRecentQuestions] = useState([]);
+const QrCodeQuestion = ({userEmail}) => {
+  const [QrCodeQuestion, setQrCodeQuestion] = useState([]);
+  const [QrCodeUrl, setQrCodeUrl] = useState([]);
   
+  console.log(userEmail);
 
-  
-    const fetchRecentQuestions = async () => {
+  useEffect(() => {
+    const fetchQrCodeQuestion = async () => {
       try {
-        console.log(userEmail);
-        console.log(recentQuestions);
-        const response = await fetch('/api/getRecentQuestions', {
+        const response = await fetch('/api/getQrCode', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userEmail}),
+          body: JSON.stringify({userEmail}),
           
         });
         if (!response.ok) {
@@ -27,26 +28,35 @@ const RecentQuestions = ( {userEmail}) => {
         }
 
         const data = await response.json();
-        setRecentQuestions(data);
+        setQrCodeQuestion(data);
+        generateQRCodeUrl(data.id);
       } catch (error) {
         console.error('Error fetching recent questions:', error.message);
       }
     };
-  
-    useEffect(() => {
-    fetchRecentQuestions();
+
+    fetchQrCodeQuestion();
   }, [userEmail]);
-  
+
+  const generateQRCodeUrl = (question ) => {
+    // Create a URL based on the parameters
+    const url = `${window.location.origin}/qrcodevalidator?question=${encodeURIComponent(question)}`;
+    console.log(question);
+    console.log(url);
+    setQrCodeUrl(url);
+    return ;
+  };  
   
 
-  const handleShareImage = async (question, platform, index) => {
+
+  const handleShareImage = async (id) => {
     try {
-      const canvasId = `canvas-${index}`;
+      
 
-      const listItem = document.querySelector(`#${canvasId}`);
-
+      const listItem = document.getElementById(id);
+      console.log (id);
       if (!listItem) {
-        console.error(`List item with id ${canvasId} not found.`);
+        console.error(`List item with id canvas not found.`);
         return;
       }
 
@@ -59,10 +69,10 @@ const RecentQuestions = ( {userEmail}) => {
       const dataUrl = canvas.toDataURL();
 
       // Download the image for manual sharing on Instagram
-      if (platform === 'instagram') {
-        download(dataUrl, 'shared_image.png');
-        return;
-      }
+      
+      download(dataUrl, 'shared_image.png');
+      return;
+      
     } catch (error) {
       console.error('Error creating and sharing image:', error.message);
     }
@@ -70,32 +80,47 @@ const RecentQuestions = ( {userEmail}) => {
 
   return (
     <div className="mt-8">
+      <div className="flex mt-2" >
+      <QRCode value={QrCodeUrl} id="qrcode" />
+      <button
+                className="text-gray-500 hover:text-gray-900"
+                onClick={() => handleShareImage( 'qrcode')}
+              >
+      <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fillRule="evenodd"
+                    d="M17 17H17.01M17.4 14H18C18.9319 14 19.3978 14 19.7654 14.1522C20.2554 14.3552 20.6448 14.7446 20.8478 15.2346C21 15.6022 21 16.0681 21 17C21 17.9319 21 18.3978 20.8478 18.7654C20.6448 19.2554 20.2554 19.6448 19.7654 19.8478C19.3978 20 18.9319 20 18 20H6C5.06812 20 4.60218 20 4.23463 19.8478C3.74458 19.6448 3.35523 19.2554 3.15224 18.7654C3 18.3978 3 17.9319 3 17C3 16.0681 3 15.6022 3.15224 15.2346C3.35523 14.7446 3.74458 14.3552 4.23463 14.1522C4.60218 14 5.06812 14 6 14H6.6M12 15V4M12 15L9 12M12 15L15 12" 
+                    stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+                </button>
+        </div>
       <ul>
-        {recentQuestions.map((question, index) => (
-          <li key={question.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id={`canvas-${index}`}>
+        <li key={QrCodeQuestion.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id="cardquestion">
             <div className="flex items-center justify-center">
               <span className="whitespace-nowrap text-xl font-semibold ">DSIDER APP</span>
               <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
             </div>
             <div>
-              <p className="text-lg font-semibold mb-2">{question.question}</p>
-              {question.possibleAnswers && (
+              <p className="text-lg font-semibold mb-2">{QrCodeQuestion.question}</p>
+              {QrCodeQuestion.possibleAnswers && (
                 <div className="flex">
-                  {question.possibleAnswers.map((possibleAnswer, i) => (
+                  {QrCodeQuestion.possibleAnswers.map((possibleAnswer, i) => (
                     <span key={i} className={`mr-2`}>
                       {possibleAnswer}
                     </span>
                   ))}
                 </div>
               )}
-              <p className={`font-bold text-lg ${question.answer === 'No' ? 'text-red-500' : 'text-green-500'} : ''}`}>
-                {question.questionType === 'qrCode' ? '<Go to Qr Code page>' :question.answer}
+              <p className={`font-bold text-lg ${QrCodeQuestion.answer === 'No' ? 'text-red-500' : 'text-green-500'} : ''}`}>
+                {QrCodeQuestion.answer}
               </p>
             </div>
             <div className="flex justify-end mt-2">
               <button
                 className="text-gray-500 hover:text-gray-900"
-                onClick={() => handleShareImage(question, 'instagram', index)}
+                onClick={() => handleShareImage( 'cardquestion')}
               >
                 <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path
@@ -107,9 +132,10 @@ const RecentQuestions = ( {userEmail}) => {
               </button>
             </div>
           </li>
-        ))}
       </ul>
+      
     </div>
   );
-}
-export default RecentQuestions;
+};
+
+export default QrCodeQuestion;

@@ -6,6 +6,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
   const [loading, setLoading] = useState(false);
   const [questionType, setQuestionType] = useState('yesNo'); // Default to yes/no
   const [possibleAnswers, setPossibleAnswers] = useState('');
+  const [refreshTime, setRefreshTime] = useState(1);
 
   const askUniverse = async () => {
     if (question.trim() !== '') {
@@ -26,7 +27,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ question, userEmail, questionType, possibleAnswers }),
+          body: JSON.stringify({ question, userEmail, questionType, possibleAnswers, refreshTime }),
           
         });
 
@@ -40,7 +41,8 @@ const UniverseQuestionForm = ({ userEmail }) => {
         setTimeout(() => {
           setAnswer(data.answer);
           setQuestion('');
-          setPossibleAnswers(''); // Clear possible answers after asking
+          setPossibleAnswers('');
+          setRefreshTime(''); // Clear possible answers after asking
           setLoading(false);
           console.log('Question saved to the database:', data.question);
         }, 200);
@@ -83,7 +85,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           onChange={(e) => setQuestion(e.target.value)}
           required
         />
-        <div>
+        <div className = 'flex space-x-4'>
           <label>
             <input
               type="radio"
@@ -102,7 +104,17 @@ const UniverseQuestionForm = ({ userEmail }) => {
               checked={questionType === 'multipleChoice'}
               onChange={() => setQuestionType('multipleChoice')}
             />
-            Multiple Choice
+            Multiple
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="questionType"
+              value="qrCode"
+              checked={questionType === 'qrCode'}
+              onChange={() => setQuestionType('qrCode')}
+            />
+            Qr Code
           </label>
         </div>
         {questionType === 'multipleChoice' && (
@@ -118,6 +130,23 @@ const UniverseQuestionForm = ({ userEmail }) => {
               defaultValue={possibleAnswers}
               onChange={handlePossibleAnswersChange}
               maxLength={80} // 40 characters for each answer and one comma for separation
+              required
+            />
+          </div>
+        )}
+        {questionType === 'qrCode' && (
+          <div>
+            <label htmlFor="refreshTime" className="block mb-2">
+              Time to refresh (Minutes):
+            </label>
+            <input
+              type="number"
+              id="refreshTime"
+              name="refreshTime"
+              className="border p-2 w-10 mb-4"
+              defaultValue={refreshTime}
+              onChange={setRefreshTime}
+              step = "1"
               required
             />
           </div>

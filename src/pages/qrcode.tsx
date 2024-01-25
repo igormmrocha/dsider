@@ -1,21 +1,21 @@
 import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import Logo from '../logo/logo.png';
-import UniverseQuestionForm from '../components/UniverseQuestionForm';
-import RecentQuestions from '../components/RecentQuestions';
 import Photo from '../logo/no_one.jpg';
+import QrCodeQuestion from '../components/QrCodeQuestion';
 
 
 
-export default function Home() {
+export default function qrCode() {
   const { data } = useSession();
-    
+  console.log(data);
+      
+  
   return Component();
-
   function Component() {
     return (
       <div className="bg-green-300">
@@ -58,8 +58,7 @@ export default function Home() {
         </div>
         
       </Navbar>
-      <UniverseQuestionForm userEmail={data?.user?.email} />
-      <RecentQuestions userEmail ={data?.user?.email}/>
+      <QrCodeQuestion userEmail ={data?.user?.email}/>
       </div>
     );
   }

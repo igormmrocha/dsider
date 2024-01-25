@@ -59,9 +59,20 @@ model VerificationToken {
 model Question {
   id             Int      @id @default(autoincrement())
   question       String
-  answer         String
+  answer         String?
   possibleAnswers String[]  // Array to store possible answers
   createdAt      DateTime @default(now())
   userEmail      String
   questionType   String   @default("yesNo") // Add a default value
+  refreshTime    Int      @default(30) 
+  lastRefreshed  DateTime @default(now()) 
+}
+
+model QrAnswer {
+  id              Int @id @default(autoincrement())
+  question_id     Int
+  answerName      String
+  answerEmail     String
+  answer          Boolean
+  createdAt       DateTime @default(now())          
 }
