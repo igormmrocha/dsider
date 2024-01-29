@@ -238,7 +238,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-green-300">
+    <div className="bg-green-300 min-h-screen">
       <Navbar fluid rounded>
         <Navbar.Brand>
           <img

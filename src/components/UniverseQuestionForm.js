@@ -114,7 +114,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
               checked={questionType === 'qrCode'}
               onChange={() => setQuestionType('qrCode')}
             />
-            Qr Code
+            Shared
           </label>
         </div>
         {questionType === 'multipleChoice' && (

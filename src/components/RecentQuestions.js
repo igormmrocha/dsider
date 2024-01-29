@@ -69,7 +69,7 @@ const RecentQuestions = ( {userEmail}) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 bg-green-300 min-h-screen">
       <ul>
         {recentQuestions.map((question, index) => (
           <li key={question.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id={`canvas-${index}`}>
@@ -89,7 +89,7 @@ const RecentQuestions = ( {userEmail}) => {
                 </div>
               )}
               <p className={`font-bold text-lg ${question.answer === 'No' ? 'text-red-500' : 'text-green-500'} : ''}`}>
-                {question.questionType === 'qrCode' ? '<Go to Qr Code page>' :question.answer}
+                {question.questionType === 'qrCode' ? '<Go to shared question page>' :question.answer}
               </p>
             </div>
             <div className="flex justify-end mt-2">

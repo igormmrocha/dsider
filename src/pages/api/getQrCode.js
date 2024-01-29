@@ -16,14 +16,23 @@ export default async function handler(req, res) {
     const recentQuestions = await prisma.question.findFirst({
       where: {
         userEmail: userEmail,
-        questionType: "qrCode"
+        questionType: "qrCode",
       },
       orderBy: { createdAt: 'desc' },
-      select: { id: true, questionType:true, question: true, answer: true, possibleAnswers: true },
+      take: 100,
+      include: {
+        qrAnswers: true,
+        user: { // Use PascalCase for the model name
+          select: {
+            id: true,
+            name: true,
+            // Add other user fields you want to include
+          },
+        },
+      },
     });
-
     await prisma.$disconnect(); // Disconnect the Prisma client
-
+    
     res.status(200).json(recentQuestions);
   } catch (error) {
     console.error('Error fetching recent questions:', error);

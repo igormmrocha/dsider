@@ -1,36 +1,68 @@
 // pages/qrcodevalidator.tsx
 import { GetServerSidePropsContext } from "next";
 import { getServerSession, Session } from "next-auth";
-import { useRouter } from "next/router";  // Import the useRouter hook
-import { useEffect } from "react";  // Import the useEffect hook
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { authOptions } from "./api/auth/[...nextauth]";
 import QrCodeValidator from '../components/QrCodeValidator';
-import { useSession } from "next-auth/react";
+import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import Logo from '../logo/logo.png';
+import { signOut, useSession } from "next-auth/react";
+import Photo from '../logo/no_one.jpg';
 
 interface QRCodeValidatorProps {
-  question: any;
+  question: string;
 }
 
 const QRCodeValidator: React.FC<QRCodeValidatorProps> = ({ question }) => {
-  // You can use the 'question' variable and 'authOptions' to generate content or perform specific actions
-  const router = useRouter();  // Access the router
+  const router = useRouter();
   const { data } = useSession();
 
   useEffect(() => {
-    // Check if there is no question parameter, then redirect to home page
     if (!question) {
       router.replace("/");
     }
   }, [question, router]);
 
   return (
-    <div>
-      <h1>QR Code Validator</h1>
-      <p>Question: {question || 'Default Question'}</p>
-      <QrCodeValidator question={question} 
-      userEmail = {data?.user?.email}
-      userPhoto = {data?.user?.image}
-      userName = {data?.user?.name}
+    <div className="bg-green-300">
+      <Navbar fluid rounded>
+        <Navbar.Brand>
+          <img src={Logo.src} style={{ width: 50, height: 50 }} className="mr-3 h-6 sm:h-9" alt="Logo" />
+          <span className="self-center whitespace-nowrap text-xl font-semibold">DSIDER</span>
+        </Navbar.Brand>
+        <div className="flex md:order-2">
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={<Avatar alt="User settings" img={data?.user?.image || Photo.src} rounded />}
+          >
+            <Dropdown.Header>
+              <span className="block text-sm"> {data?.user?.name}</span>
+              <span className="block truncate text-sm font-medium">{data?.user?.email}</span>
+            </Dropdown.Header>
+            <Dropdown.Item onClick={async () => {
+              window.location.href = "/home";
+            }}>Home
+            </Dropdown.Item>
+            <Dropdown.Item onClick={async () => {
+              window.location.href = "/sharedquestion";
+            }}>Shared question
+            </Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={async () => {
+              await signOut({ redirect: false });
+              window.location.href = "/";
+            }}>Sign out
+            </Dropdown.Item>
+          </Dropdown>
+        </div>
+      </Navbar>
+        <QrCodeValidator
+        question={question}
+        userEmail={data?.user?.email}
+        userPhoto={data?.user?.image}
+        userName={data?.user?.name}
       />
     </div>
   );
@@ -47,7 +79,7 @@ export const getServerSideProps = async (
   if (!session) {
     return {
       redirect: {
-        destination: "/", // Redirect to the home page or any other page
+        destination: "/",
         permanent: false,
       },
     };
@@ -55,7 +87,7 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      question: query.question ? query.question: 0,
+      question: query.question ? query.question : '',
     },
   };
 };

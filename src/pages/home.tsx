@@ -18,7 +18,7 @@ export default function Home() {
 
   function Component() {
     return (
-      <div className="bg-green-300">
+      <div className="bg-green-300 min-h-screen">
       <Navbar fluid rounded>
         <Navbar.Brand>
           <img src= {Logo.src} style={{width: 50, height: 50}}  className="mr-3 h-6 sm:h-9" alt="Logo" />
@@ -42,8 +42,8 @@ export default function Home() {
             
             </Dropdown.Item>
             <Dropdown.Item onClick={async () => {
-              window.location.href = "/qrcode";
-            }}>Qr Code
+              window.location.href = "/sharedquestion";
+            }}>Shared question
             
             </Dropdown.Item>
             <Dropdown.Divider />

@@ -1,26 +1,30 @@
-import prisma from '../../lib/prisma';
-//import { getSession } from 'next-auth/server';
+// components/QrCodeValidator.tsx
+// ... other imports
 
 export default async function handler(req, res) {
-  //const session = await getSession({ req });
-
-  //if (!session) {
-  //  return res.status(401).json({ error: 'Unauthorized' });
-  //}
   const { question, userEmail, userPhoto, userName } = req.body;
-  var question_int = parseInt(question, 10)
+  var question_int = parseInt(question, 10);
 
   if (!question.trim() || !userEmail || !userPhoto || !userName) {
     return res.status(400).json({ error: 'Invalid data' });
   }
+
   try {
-    
     const existingQuestion = await prisma.question.findFirst({
       where: {
         id: question_int,
         questionType: 'qrCode',
       },
-      select: {  userEmail:true, createdAt:true, refreshTime: true, lastRefreshed:true },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            // Add other user fields you want to include
+          },
+        },
+      },
+      //select: { question: true, userEmail: true, createdAt: true, refreshTime: true, lastRefreshed: true },
     });
 
     if (existingQuestion) {
@@ -32,28 +36,36 @@ export default async function handler(req, res) {
 
       if (minutesSinceLastRefresh >= refreshTime) {
         await prisma.question.update({
-          where: { id:question_int },
-          data: { lastRefreshed: new Date(currentTime)},
+          where: { id: question_int },
+          data: { lastRefreshed: new Date(currentTime) },
         });
 
-        await prisma.qrAnswer.create({
+        const existingAnswer = await prisma.qrAnswer.create({
           data: {
             question_id: question_int,
             answerName: userName,
             answerEmail: userEmail,
             answer: newAnswer,
-            createdAt: new Date(currentTime)
+            createdAt: new Date(currentTime),
           },
         });
 
-        res.status(200).json(existingQuestion);
-      } 
-      
-     else {
-      const timeRemaining = refreshTime - minutesSinceLastRefresh
-      res.status(200).json({timeRemaining});
+        if (existingAnswer) {
+          res.status(200).json({
+            question: existingQuestion,
+            answer: existingAnswer,
+            timeRemaining: null, // Set timeRemaining to null when there is an answer
+          });
+        }
+      } else {
+        const timeRemaining = refreshTime - minutesSinceLastRefresh;
+        res.status(200).json({
+          question: existingQuestion,
+          answer: null, // Set answer to null when there is time remaining
+          timeRemaining,
+        });
+      }
     }
-  }
   } catch (error) {
     console.error('Error validating QR code:', error);
     res.status(500).json({ error: 'Internal server error' });
