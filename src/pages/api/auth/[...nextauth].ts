@@ -40,6 +40,8 @@ export const authOptions: AuthOptions = {
       return true; // Continue with sign-in
     },
   },
+
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
