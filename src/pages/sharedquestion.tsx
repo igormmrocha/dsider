@@ -10,7 +10,7 @@ import QrCodeQuestion from '../components/QrCodeQuestion';
 
 
 
-export default function qrCode() {
+export default function QrCode() {
   const { data } = useSession();
   console.log(data);
       

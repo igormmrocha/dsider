@@ -131,7 +131,7 @@ const QrCodeQuestion = ({ userEmail }) => {
       <ul>
         <li key={QrCodeQuestion.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id="cardquestion">
           <div className="flex items-center justify-center">
-            <span className="whitespace-nowrap text-xl font-semibold ">{QrCodeQuestion.user && QrCodeQuestion.user.name}'s Question</span>
+            <span className="whitespace-nowrap text-xl font-semibold ">{QrCodeQuestion.user && QrCodeQuestion.user.name}s Question</span>
             <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
           </div>
           <div>

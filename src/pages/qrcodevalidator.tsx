@@ -87,7 +87,7 @@ export const getServerSideProps = async (
 
   return {
     props: {
-      question: query.question ? query.question : '',
+      question: '',
     },
   };
 };
