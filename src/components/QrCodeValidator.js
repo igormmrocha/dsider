@@ -22,12 +22,12 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
       });
       const data = await response.json();
 
-      console.log('Response from validateQrCode:', data);
+      //console.log('Response from validateQrCode:', data);
 
       // Set the response data in state
       setResponseData(data);
     } catch (error) {
-      console.error('Error validating QR code:', error);
+      //console.error('Error validating QR code:', error);
     }
   };
 
