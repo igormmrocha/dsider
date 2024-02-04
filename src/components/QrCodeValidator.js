@@ -80,7 +80,7 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
               </span>
             </p>
           ) : responseData.timeRemaining ? (
-            <p>Time Remaining: {formatTimeRemaining(responseData.timeRemaining)}</p>
+            <p className="text-lg font-semibold mb-2 text-black">Time Remaining: {formatTimeRemaining(responseData.timeRemaining)}</p>
           ) : null}
         </div>
       )}
