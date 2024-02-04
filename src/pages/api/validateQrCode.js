@@ -1,16 +1,12 @@
 // components/QrCodeValidator.tsx
 // ... other imports
-
+import prisma from '../../lib/prisma';
 export default async function handler(req, res) {
   const { question, userEmail, userPhoto, userName } = req.body;
   var question_int = parseInt(question, 10);
 
   if (!question.trim() || !userEmail || !userPhoto || !userName) {
     return res.status(400);
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).end(); // Method Not Allowed
   }
 
   try {
