@@ -9,6 +9,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: question});
   }
 
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
+
   try {
     const existingQuestion = await prisma.question.findFirst({
       where: {

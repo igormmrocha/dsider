@@ -73,7 +73,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
   return (
     <div className="text-center p-8">
       <form>
-        <label htmlFor="question" className="block mb-2">
+        <label htmlFor="question" className="block mb-2 text-black">
           Ask a question to the universe:
         </label>
         <input

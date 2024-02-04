@@ -78,7 +78,7 @@ const RecentQuestions = ( {userEmail}) => {
               <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
             </div>
             <div>
-              <p className="text-lg font-semibold mb-2">{question.question}</p>
+              <p className="text-lg font-semibold mb-2 text-black">{question.question}</p>
               {question.possibleAnswers && (
                 <div className="flex">
                   {question.possibleAnswers.map((possibleAnswer, i) => (

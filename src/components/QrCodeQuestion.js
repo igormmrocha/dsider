@@ -108,7 +108,7 @@ const QrCodeQuestion = ({ userEmail }) => {
             <input
               type="text"
               readOnly
-              className="border border-gray-300 px-2 py-1 mr-2"
+              className="border border-gray-300 px-2 py-1 mr-2 text-black"
               value={QrCodeUrl}
             />
             <button
@@ -131,11 +131,11 @@ const QrCodeQuestion = ({ userEmail }) => {
       <ul>
         <li key={QrCodeQuestion.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id="cardquestion">
           <div className="flex items-center justify-center">
-            <span className="whitespace-nowrap text-xl font-semibold ">{QrCodeQuestion.user && QrCodeQuestion.user.name}s Question</span>
+            <span className="whitespace-nowrap text-xl font-semibold text-black ">{QrCodeQuestion.user && QrCodeQuestion.user.name}s Question</span>
             <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
           </div>
           <div>
-            <p className="text-lg font-semibold mb-2">{QrCodeQuestion.question}</p>
+            <p className="text-lg font-semibold mb-2 text-black">{QrCodeQuestion.question}</p>
             <div>
               {QrCodeQuestion.qrAnswers && QrCodeQuestion.qrAnswers.map((answer) => (
                 <p key={answer.id} className={`font-bold text-lg ${answer.answer ? 'text-green-500' : 'text-red-500'}`}>

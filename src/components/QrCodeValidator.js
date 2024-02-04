@@ -66,13 +66,13 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
       <div className="mb-6 p-4 bg-white rounded-lg shadow-md" id="cardquestion">
         
       <div className="flex items-center justify-center">
-            <span className="whitespace-nowrap text-xl font-semibold ">{responseData && responseData.question &&
+            <span className="whitespace-nowrap text-xl font-semibold text-black ">{responseData && responseData.question &&
             responseData.question.user.name}s Question</span>
             <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
           </div>
       {responseData && responseData.question && (
         <div>
-          <p className="text-lg font-semibold mb-2">{responseData.question.question}</p>
+          <p className="text-lg font-semibold mb-2 text-black">{responseData.question.question}</p>
           {responseData.answer ? (
             <p className= 'font-bold text-lg'>
               <span style={{ color: responseData.answer.answer ? 'green' : 'red' }}>
