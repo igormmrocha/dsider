@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   var question_int = parseInt(question, 10);
 
   if (!question.trim() || !userEmail || !userPhoto || !userName) {
-    return res.status(400).json({ error: question});
+    return res.status(400).json({ error: 'invalid data'});
   }
 
   if (req.method !== 'POST') {
