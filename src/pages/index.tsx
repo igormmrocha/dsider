@@ -23,13 +23,15 @@ export default function Home() {
           <div className="flex flex-col p-6 pb-2 space-y-1">
             <img src={Logo.src} style={{ width: 100, height: 100 }} alt="logo" />
             <div className="tracking-tight text-2xl font-bold text-black">DSIDER</div>
+            
           </div>
         </div>
         <div className="flex flex-col p-6 pb-2 space-y-1">
-          <h3 className="tracking-tight text-lg font-bold">Login</h3>
-          <p className="text-sm text-muted-foreground">
-            Choose between login with Google or enter without login.
+        <p className="text-sm text-muted-foreground">
+            Let the universe decide your path. Challenge your friends to determine who will be paying for the beer. 
           </p>
+          <h3 className="tracking-tight text-lg font-bold">Login</h3>
+          
         </div>
         <div className="p-6 pt-2">
           <div className="space-y-3">
