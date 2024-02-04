@@ -74,7 +74,7 @@ const RecentQuestions = ( {userEmail}) => {
         {recentQuestions.map((question, index) => (
           <li key={question.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id={`canvas-${index}`}>
             <div className="flex items-center justify-center">
-              <span className="whitespace-nowrap text-xl font-semibold ">DSIDER APP</span>
+              <span className="whitespace-nowrap text-xl font-semibold text-black ">DSIDER APP</span>
               <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
             </div>
             <div>

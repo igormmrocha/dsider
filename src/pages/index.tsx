@@ -22,7 +22,7 @@ export default function Home() {
         <div className="flex justify-center">
           <div className="flex flex-col p-6 pb-2 space-y-1">
             <img src={Logo.src} style={{ width: 100, height: 100 }} alt="logo" />
-            <div className="tracking-tight text-2xl font-bold">DSIDER</div>
+            <div className="tracking-tight text-2xl font-bold text-black">DSIDER</div>
           </div>
         </div>
         <div className="flex flex-col p-6 pb-2 space-y-1">

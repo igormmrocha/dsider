@@ -10,13 +10,10 @@ import Logo from '../logo/logo.png';
 import { signOut, useSession } from "next-auth/react";
 import Photo from '../logo/no_one.jpg';
 
-interface QRCodeValidatorProps {
-  question: string;
-}
-
-const QRCodeValidator: React.FC<QRCodeValidatorProps> = ({ question }) => {
+export default function QRCodeValidatorPage() {
   const router = useRouter();
   const { data } = useSession();
+  const question = router.query.question; // Extracting question from the query parameters
 
   useEffect(() => {
     if (!question) {
@@ -29,7 +26,7 @@ const QRCodeValidator: React.FC<QRCodeValidatorProps> = ({ question }) => {
       <Navbar fluid rounded>
         <Navbar.Brand>
           <img src={Logo.src} style={{ width: 50, height: 50 }} className="mr-3 h-6 sm:h-9" alt="Logo" />
-          <span className="self-center whitespace-nowrap text-xl font-semibold">DSIDER</span>
+          <span className="self-center whitespace-nowrap text-xl font-semibold text-black">DSIDER</span>
         </Navbar.Brand>
         <div className="flex md:order-2">
           <Dropdown
@@ -58,7 +55,7 @@ const QRCodeValidator: React.FC<QRCodeValidatorProps> = ({ question }) => {
           </Dropdown>
         </div>
       </Navbar>
-        <QrCodeValidator
+      <QrCodeValidator
         question={question}
         userEmail={data?.user?.email}
         userPhoto={data?.user?.image}
@@ -66,15 +63,10 @@ const QRCodeValidator: React.FC<QRCodeValidatorProps> = ({ question }) => {
       />
     </div>
   );
-};
+}
 
-export default QRCodeValidator;
-
-export const getServerSideProps = async (
-  ctx: GetServerSidePropsContext,
-): Promise<{ props: QRCodeValidatorProps } | { redirect: { destination: string; permanent: boolean } }> => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const session = await getServerSession(ctx.req, ctx.res, authOptions);
-  const { query } = ctx;
 
   if (!session) {
     return {
@@ -86,8 +78,6 @@ export const getServerSideProps = async (
   }
 
   return {
-    props: {
-      question: '',
-    },
+    props: {},
   };
 };

@@ -22,7 +22,7 @@ export default function QrCode() {
       <Navbar fluid rounded>
         <Navbar.Brand>
           <img src= {Logo.src} style={{width: 50, height: 50}}  className="mr-3 h-6 sm:h-9" alt="Logo" />
-          <span className="self-center whitespace-nowrap text-xl font-semibold">DSIDER</span>
+          <span className="self-center whitespace-nowrap text-xl font-semibold text-black">DSIDER</span>
         </Navbar.Brand>
         <div className="flex md:order-2">
           <Dropdown
