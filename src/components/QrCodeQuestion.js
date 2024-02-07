@@ -139,7 +139,7 @@ const QrCodeQuestion = ({ userEmail }) => {
             <div>
               {QrCodeQuestion.qrAnswers && QrCodeQuestion.qrAnswers.map((answer) => (
                 <p key={answer.id} className={`font-bold text-lg ${answer.answer ? 'text-green-500' : 'text-red-500'}`}>
-                  {answer.answerName}: {answer.answer ? 'Você' : "Você não"}
+                  {answer.answerName}: {answer.answer ? 'Eu' : "Eu não"}
                 </p>
               ))}
             </div>
