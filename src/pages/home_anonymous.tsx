@@ -38,13 +38,13 @@ const UniverseQuestionForm: React.FC<UniverseQuestionFormProps> = ({
     <div className="text-center p-8">
       <form>
         <label htmlFor="question" className="block mb-2">
-          Ask a question to the universe:
+          Pergunte ao universo:
         </label>
         <input
           type="text"
           id="question"
           name="question"
-          className="border p-2 w-full mb-4"
+          className="border p-2 w-full mb-4 text-black"
           defaultValue={question}
           onChange={(e) => setQuestion(e.target.value)}
           required
@@ -54,7 +54,7 @@ const UniverseQuestionForm: React.FC<UniverseQuestionFormProps> = ({
             <input
               type="radio"
               name="questionType"
-              value="yesNo"
+              value="simNão"
               checked={questionType === 'yesNo'}
               onChange={() => setQuestionType('yesNo')}
             />
@@ -64,7 +64,7 @@ const UniverseQuestionForm: React.FC<UniverseQuestionFormProps> = ({
             <input
               type="radio"
               name="questionType"
-              value="multipleChoice"
+              value="multiplaEscolha"
               checked={questionType === 'multipleChoice'}
               onChange={() => setQuestionType('multipleChoice')}
             />
@@ -74,13 +74,13 @@ const UniverseQuestionForm: React.FC<UniverseQuestionFormProps> = ({
         {questionType === 'multipleChoice' && (
           <div>
             <label htmlFor="possibleAnswers" className="block mb-2">
-              Possible answers (comma-separated):
+              Possíveis respostas (separadas por vírgula):
             </label>
             <input
               type="text"
               id="possibleAnswers"
               name="possibleAnswers"
-              className="border p-2 w-full mb-4"
+              className="border p-2 w-full mb-4 text-black"
               defaultValue={possibleAnswers}
               onChange={handlePossibleAnswersChange}
               maxLength={80} // 40 characters for each answer and one comma for separation
@@ -94,7 +94,7 @@ const UniverseQuestionForm: React.FC<UniverseQuestionFormProps> = ({
           className="bg-purple-500 text-black px-4 py-2 rounded"
           onClick={askUniverse}
         >
-          Get Answer
+          Obter Resposta
         </button>
       </form>
     </div>
@@ -131,8 +131,8 @@ const RecentQuestions: React.FC<RecentQuestionsProps> = ({
           </div>
           <div>
             <p className="text-lg font-semibold mb-2">{question}</p>
-            <div>{questionType === 'yesNo' ?  '' : possibleAnswers}</div>
-            <p className={`font-bold text-lg ${answer === 'No' ? 'text-red-500' : 'text-green-500'}`}>
+            <div className ="text-black">{questionType === 'yesNo' ?  '' : possibleAnswers}</div>
+            <p className={`font-bold text-lg ${answer === 'Não' ? 'text-red-500' : 'text-green-500'}`}>
               {answer}
             </p>
 
@@ -179,7 +179,7 @@ export default function Home() {
           const validAnswers = trimmedAnswers.filter((answer) => answer.length > 0);
 
           if (validAnswers.length < 2) {
-            throw new Error('Please provide at least two separated answers for Multiple Choice questions.');
+            throw new Error('Forneça pelo menos duas respostas possíveis separadas por vírgula.');
           }
 
           // Simulate a random answer for multiple choice
@@ -188,14 +188,14 @@ export default function Home() {
         } else {
           // Simulate a random Yes/No answer
           const randomNumber = Math.floor(Math.random() * 2);
-          newAnswer = randomNumber === 0 ? 'Yes' : 'No';
+          newAnswer = randomNumber === 0 ? 'Sim' : 'Não';
         }
 
         // Simulate saving question to the database
         setAnswer(newAnswer);
         //setQuestion('');
         //setPossibleAnswers(''); // Clear possible answers after asking
-        console.log('Question saved to the database:', question);
+        
 
         // Adjust the state update logic
         setTimeout(() => {
@@ -209,7 +209,7 @@ export default function Home() {
         //alert(error.message); // Show an alert with the error message
       }
     } else {
-      alert('Please enter a question before asking the universe.');
+      alert('Por favor entre com uma pergunta antes de enviar ao universo');
     }
   };
 
@@ -230,10 +230,10 @@ export default function Home() {
         download(dataUrl, 'shared_image.png');
         return;
       } catch (error) {
-        console.error('Error creating and sharing image');
+        console.error('Erro ao compartilhar imagem');
       }
     } else {
-      console.error('Element with ID "canvas" not found.');
+      console.error('Error ao compartilhar imagem');
     }
   };
 
@@ -258,7 +258,7 @@ export default function Home() {
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">{data?.user?.name || 'Anonymous'}</span>
+              <span className="block text-sm">{data?.user?.name || 'Anônimo'}</span>
               <span className="block truncate text-sm font-medium">{data?.user?.email}</span>
             </Dropdown.Header>
             <Dropdown.Divider />
@@ -268,7 +268,7 @@ export default function Home() {
                 window.location.href = '/';
               }}
             >
-              Back to Login
+              Voltar ao Login
             </Dropdown.Item>
           </Dropdown>
         </div>

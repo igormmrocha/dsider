@@ -21,7 +21,7 @@ const QrCodeQuestion = ({ userEmail }) => {
         });
 
         if (!response.ok) {
-          throw new Error('Network response was not ok, recent questions');
+          throw new Error('Erro ao enviar/receber dados');
         }
         const response2 = await fetch('/api/getBaseLink', {
           method: 'POST',
@@ -38,7 +38,7 @@ const QrCodeQuestion = ({ userEmail }) => {
         generateQRCodeUrl(data2,data.id);
         console.log(data);
       } catch (error) {
-        console.error('Error fetching recent questions:', error.message);
+        console.error('Erro ao obter perguntas', error.message);
       }
     };
 
@@ -68,7 +68,7 @@ const QrCodeQuestion = ({ userEmail }) => {
       console.log(id);
 
       if (!listItem) {
-        console.error(`List item with id ${id} not found.`);
+        console.error(`Erro ao compartilhar ${id} não encontrado.`);
         return;
       }
 
@@ -81,7 +81,7 @@ const QrCodeQuestion = ({ userEmail }) => {
       download(dataUrl, 'shared_image.png');
       return;
     } catch (error) {
-      console.error('Error creating and sharing image:', error.message);
+      console.error('Erro ao compartilhar:', error.message);
     }
   };
 
@@ -131,7 +131,7 @@ const QrCodeQuestion = ({ userEmail }) => {
       <ul>
         <li key={QrCodeQuestion.id} className="mb-6 p-4 bg-white rounded-lg shadow-md" id="cardquestion">
           <div className="flex items-center justify-center">
-            <span className="whitespace-nowrap text-xl font-semibold text-black ">{QrCodeQuestion.user && QrCodeQuestion.user.name}s Question</span>
+            <span className="whitespace-nowrap text-xl font-semibold text-black ">Pergunta de {QrCodeQuestion.user && QrCodeQuestion.user.name}</span>
             <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
           </div>
           <div>
@@ -139,7 +139,7 @@ const QrCodeQuestion = ({ userEmail }) => {
             <div>
               {QrCodeQuestion.qrAnswers && QrCodeQuestion.qrAnswers.map((answer) => (
                 <p key={answer.id} className={`font-bold text-lg ${answer.answer ? 'text-green-500' : 'text-red-500'}`}>
-                  {answer.answerName}: {answer.answer ? 'Me' : "Not me"}
+                  {answer.answerName}: {answer.answer ? 'Você' : "Você não"}
                 </p>
               ))}
             </div>

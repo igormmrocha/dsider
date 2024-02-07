@@ -126,7 +126,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
               type="text"
               id="possibleAnswers"
               name="possibleAnswers"
-              className="border p-2 w-full mb-4"
+              className="border p-2 w-full mb-4 text-black"
               defaultValue={possibleAnswers}
               onChange={handlePossibleAnswersChange}
               maxLength={80} // 40 characters for each answer and one comma for separation
@@ -143,7 +143,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
               type="number"
               id="refreshTime"
               name="refreshTime"
-              className="border p-2 w-10 mb-4"
+              className="border p-2 w-10 mb-4 text-black"
               defaultValue={refreshTime}
               onChange={setRefreshTime}
               step = "1"

@@ -80,9 +80,9 @@ const RecentQuestions = ( {userEmail}) => {
             <div>
               <p className="text-lg font-semibold mb-2 text-black">{question.question}</p>
               {question.possibleAnswers && (
-                <div className="flex">
+                <div className="flex text-black">
                   {question.possibleAnswers.map((possibleAnswer, i) => (
-                    <span key={i} className={`mr-2`}>
+                    <span key={i} className={`mr-2 text-black`}>
                       {possibleAnswer}
                     </span>
                   ))}

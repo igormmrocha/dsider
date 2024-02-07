@@ -37,7 +37,7 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
       console.log(id);
 
       if (!listItem) {
-        console.error(`List item with id ${id} not found.`);
+        console.error(`Elemento ${id} não encontrado.`);
         return;
       }
 
@@ -50,7 +50,7 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
       download(dataUrl, 'shared_image.png');
       return;
     } catch (error) {
-      console.error('Error creating and sharing image:', error.message);
+      console.error('Erro ao compartilhar imagem:', error.message);
     }
   };
 
@@ -66,8 +66,8 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
       <div className="mb-6 p-4 bg-white rounded-lg shadow-md" id="cardquestion">
         
       <div className="flex items-center justify-center">
-            <span className="whitespace-nowrap text-xl font-semibold text-black ">{responseData && responseData.question &&
-            responseData.question.user.name}s Question</span>
+            <span className="whitespace-nowrap text-xl font-semibold text-black ">Pergunta de {responseData && responseData.question &&
+            responseData.question.user.name}</span>
             <img src={Logo.src} style={{ width: 50, height: 50 }} className="ml-3 h-6 sm:h-9" alt="Logo" />
           </div>
       {responseData && responseData.question && (
@@ -76,11 +76,11 @@ const QrCodeValidator = ({ question, userEmail, userPhoto, userName }) => {
           {responseData.answer ? (
             <p className= 'font-bold text-lg'>
               <span style={{ color: responseData.answer.answer ? 'green' : 'red' }}>
-                {String(responseData.answer.answer ? 'You' : 'Not You')}
+                {String(responseData.answer.answer ? 'Você' : 'Você não')}
               </span>
             </p>
           ) : responseData.timeRemaining ? (
-            <p className="text-lg font-semibold mb-2 text-black">Time Remaining: {formatTimeRemaining(responseData.timeRemaining)}</p>
+            <p className="text-lg font-semibold mb-2 text-black">Aguarde: {formatTimeRemaining(responseData.timeRemaining)}</p>
           ) : null}
         </div>
       )}

@@ -9,14 +9,14 @@ export default async function handler(req, res) {
   const { question, userEmail, questionType, possibleAnswers, refreshTime } = req.body;
 
   if (!question.trim() || !userEmail || !questionType) {
-    return res.status(400).json({ error: 'Invalid data' });
+    return res.status(400).json({ error: 'Dados inválidos' });
   }
 
   let newAnswer;
 
   if (questionType === 'yesNo') {
     const randomNumber = Math.floor(Math.random() * 2);
-    newAnswer = randomNumber === 0 ? 'Yes' : 'No';
+    newAnswer = randomNumber === 0 ? 'Sim' : 'Não';
   } else if (questionType === 'multipleChoice' && possibleAnswers) {
     const answersArray = possibleAnswers.split(',').map(answer => answer.trim());
 
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       const randomIndex = Math.floor(Math.random() * answersArray.length);
       newAnswer = answersArray[randomIndex];
     } else {
-      return res.status(400).json({ error: 'At least two possible answers, each with a maximum of 40 characters, are required for Multiple Choice questions.' });
+      return res.status(400).json({ error: 'Pelo menos duas respostas possíveis separadas por vírgula.' });
     }
   } 
   else if (questionType === 'qrCode') {
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   } 
   
   else{
-    return res.status(400).json({ error: 'Invalid question type or missing possible answers for Multiple Choice questions.' });
+    return res.status(400).json({ error: 'Questão inválida ou não tem respostas possíveis' });
   }
 
   try {

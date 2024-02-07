@@ -28,7 +28,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col p-6 pb-2 space-y-1">
         <p className="text-sm text-muted-foreground">
-            Let the universe decide your path. Challenge your friends to determine who will be paying for the beer. 
+        Deixe o universo decidir seu caminho. Desafie seus amigos para determinar quem vai pagar pela cerveja. 
           </p>
           <h3 className="tracking-tight text-lg font-bold">Login</h3>
           
@@ -39,13 +39,13 @@ export default function Home() {
               className="text-black bg-purple-500 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-4 py-2 w-full"
               onClick={signInWithEmailAndPassword}
             >
-              Enter without login
+              Entre sem logar
             </button>
             <button
               onClick={() => signIn("google")}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full bg-purple-500 text-black"
             >
-              Login with Google
+              Logar com o Google
             </button>
           </div>
         </div>

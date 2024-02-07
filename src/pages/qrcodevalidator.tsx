@@ -44,13 +44,13 @@ export default function QRCodeValidatorPage() {
             </Dropdown.Item>
             <Dropdown.Item onClick={async () => {
               window.location.href = "/sharedquestion";
-            }}>Shared question
+            }}>Compartilhada
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item onClick={async () => {
               await signOut({ redirect: false });
               window.location.href = "/";
-            }}>Sign out
+            }}>Log out
             </Dropdown.Item>
           </Dropdown>
         </div>
