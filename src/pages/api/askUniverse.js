@@ -44,7 +44,7 @@ export default async function handler(req, res) {
         possibleAnswers: questionType === 'multipleChoice' ? { set: possibleAnswers.split(',').map(answer => answer.trim()) } : { set: [] },
         userEmail: userEmail,
         createdAt: new Date(),
-        refreshTime: refreshTime
+        refreshTime: 0
       },
     });
 

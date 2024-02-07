@@ -27,7 +27,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ question, userEmail, questionType, possibleAnswers, refreshTime }),
+          body: JSON.stringify({ question, userEmail, questionType, possibleAnswers }),
           
         });
 
@@ -42,7 +42,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           setAnswer(data.answer);
           setQuestion('');
           setPossibleAnswers('');
-          setRefreshTime(''); // Clear possible answers after asking
+          
           setLoading(false);
           //console.log('Question saved to the database:', data.question);
         }, 200);
@@ -120,7 +120,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
         {questionType === 'multipleChoice' && (
           <div>
             <label htmlFor="possibleAnswers" className="block mb-2">
-              Respostas possíveis (separado por vírgula):
+              Respostas possíveis (separadas por vírgula):
             </label>
             <input
               type="text"
@@ -134,23 +134,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
             />
           </div>
         )}
-        {questionType === 'qrCode' && (
-          <div>
-            <label htmlFor="refreshTime" className="block mb-2">
-              Tempo de espera (Minutos):
-            </label>
-            <input
-              type="number"
-              id="refreshTime"
-              name="refreshTime"
-              className="border p-2 w-10 mb-4 text-black"
-              defaultValue={1}
-              onChange={setRefreshTime}
-              step = "1"
-              required
-            />
-          </div>
-        )}
+        
         <br />
         <button
           type="button"

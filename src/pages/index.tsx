@@ -39,7 +39,7 @@ export default function Home() {
               className="text-black bg-purple-500 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-4 py-2 w-full"
               onClick={signInWithEmailAndPassword}
             >
-              Entre sem logar
+              Entrar sem logar
             </button>
             <button
               onClick={() => signIn("google")}
