@@ -80,7 +80,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           type="text"
           id="question"
           name="question"
-          className="border p-2 w-full mb-4"
+          className="border p-2 w-full mb-4 text-black"
           defaultValue={question}
           onChange={(e) => setQuestion(e.target.value)}
           required
@@ -144,7 +144,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
               id="refreshTime"
               name="refreshTime"
               className="border p-2 w-10 mb-4 text-black"
-              defaultValue={refreshTime}
+              defaultValue={1}
               onChange={setRefreshTime}
               step = "1"
               required
@@ -164,7 +164,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
       {answer && (
         <p
           className={`font-bold mt-4 ${
-            answer === 'Yes' ? 'text-green-500' : answer === 'No' ? 'text-red-500' : ''
+            answer === 'Sim' ? 'text-green-500' : answer === 'Não' ? 'text-red-500' : ''
           }`}
           style={{ transition: 'opacity 0.5s', opacity: 1 }}
         >

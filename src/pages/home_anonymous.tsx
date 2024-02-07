@@ -130,7 +130,7 @@ const RecentQuestions: React.FC<RecentQuestionsProps> = ({
             />
           </div>
           <div>
-            <p className="text-lg font-semibold mb-2">{question}</p>
+            <p className="text-lg font-semibold mb-2 text-black">{question}</p>
             <div className ="text-black">{questionType === 'yesNo' ?  '' : possibleAnswers}</div>
             <p className={`font-bold text-lg ${answer === 'Não' ? 'text-red-500' : 'text-green-500'}`}>
               {answer}

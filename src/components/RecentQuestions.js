@@ -88,7 +88,7 @@ const RecentQuestions = ( {userEmail}) => {
                   ))}
                 </div>
               )}
-              <p className={`font-bold text-lg ${question.answer === 'No' ? 'text-red-500' : 'text-green-500'} : ''}`}>
+              <p className={`font-bold text-lg ${question.answer === 'Não' ? 'text-red-500' : 'text-green-500'} : ''}`}>
                 {question.questionType === 'qrCode' ? '<veja na aba da Compartilhada>' :question.answer}
               </p>
             </div>
