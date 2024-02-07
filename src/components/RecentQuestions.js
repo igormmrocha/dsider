@@ -23,13 +23,13 @@ const RecentQuestions = ( {userEmail}) => {
           
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok, recent questions');
+          throw new Error('Erro');
         }
 
         const data = await response.json();
         setRecentQuestions(data);
       } catch (error) {
-        console.error('Error fetching recent questions:', error.message);
+        console.error('Erro:', error.message);
       }
     };
   
@@ -89,7 +89,7 @@ const RecentQuestions = ( {userEmail}) => {
                 </div>
               )}
               <p className={`font-bold text-lg ${question.answer === 'No' ? 'text-red-500' : 'text-green-500'} : ''}`}>
-                {question.questionType === 'qrCode' ? '<Go to shared question page>' :question.answer}
+                {question.questionType === 'qrCode' ? '<veja na aba da Compartilhada>' :question.answer}
               </p>
             </div>
             <div className="flex justify-end mt-2">

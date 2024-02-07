@@ -54,21 +54,21 @@ const UniverseQuestionForm: React.FC<UniverseQuestionFormProps> = ({
             <input
               type="radio"
               name="questionType"
-              value="simNão"
+              value="yesNo"
               checked={questionType === 'yesNo'}
               onChange={() => setQuestionType('yesNo')}
             />
-            Yes/No
+            Sim/Não
           </label>
           <label>
             <input
               type="radio"
               name="questionType"
-              value="multiplaEscolha"
+              value="multipleChoice"
               checked={questionType === 'multipleChoice'}
               onChange={() => setQuestionType('multipleChoice')}
             />
-            Multiple Choice
+            Multiplas
           </label>
         </div>
         {questionType === 'multipleChoice' && (

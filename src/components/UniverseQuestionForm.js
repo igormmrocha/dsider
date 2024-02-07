@@ -18,7 +18,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           const validAnswers = trimmedAnswers.filter(answer => answer.length > 0);
 
           if (validAnswers.length < 2) {
-            throw new Error('Please provide at least two separated answers for Multiple Choice questions.');
+            throw new Error('Forneça pelo menos duas respostas separadas');
           }
         }
 
@@ -33,7 +33,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
 
         
         if (!response.ok) {
-          throw new Error('Network response was not ok, question form');
+          throw new Error('Não foi possível enviar pergunta');
         }
 
         const data = await response.json();
@@ -44,7 +44,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
           setPossibleAnswers('');
           setRefreshTime(''); // Clear possible answers after asking
           setLoading(false);
-          console.log('Question saved to the database:', data.question);
+          //console.log('Question saved to the database:', data.question);
         }, 200);
 
         setTimeout(() => {
@@ -56,7 +56,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
         alert(error.message); // Show an alert with the error message
       }
     } else {
-      alert('Please enter a question before asking the universe.');
+      alert('Por favor escreva uma pergunta antes de enviar ao universo');
     }
   };
 
@@ -74,7 +74,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
     <div className="text-center p-8">
       <form>
         <label htmlFor="question" className="block mb-2 text-black">
-          Ask a question to the universe:
+          Pergunte ao universo:
         </label>
         <input
           type="text"
@@ -94,7 +94,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
               checked={questionType === 'yesNo'}
               onChange={() => setQuestionType('yesNo')}
             />
-            Yes/No
+            Sim/Não
           </label>
           <label>
             <input
@@ -104,7 +104,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
               checked={questionType === 'multipleChoice'}
               onChange={() => setQuestionType('multipleChoice')}
             />
-            Multiple
+            Multiplas
           </label>
           <label>
             <input
@@ -114,13 +114,13 @@ const UniverseQuestionForm = ({ userEmail }) => {
               checked={questionType === 'qrCode'}
               onChange={() => setQuestionType('qrCode')}
             />
-            Shared
+            Compartilhada
           </label>
         </div>
         {questionType === 'multipleChoice' && (
           <div>
             <label htmlFor="possibleAnswers" className="block mb-2">
-              Possible answers (comma-separated):
+              Respostas possíveis (separado por vírgula):
             </label>
             <input
               type="text"
@@ -137,7 +137,7 @@ const UniverseQuestionForm = ({ userEmail }) => {
         {questionType === 'qrCode' && (
           <div>
             <label htmlFor="refreshTime" className="block mb-2">
-              Time to refresh (Minutes):
+              Tempo de espera (Minutos):
             </label>
             <input
               type="number"
@@ -157,10 +157,10 @@ const UniverseQuestionForm = ({ userEmail }) => {
           className="bg-purple-500 text-black px-4 py-2 rounded"
           onClick={askUniverse}
         >
-          Get Answer
+          Obter Resposta
         </button>
       </form>
-      {loading && <p>Asking universe...</p>}
+      {loading && <p>Perguntando ao universo...</p>}
       {answer && (
         <p
           className={`font-bold mt-4 ${

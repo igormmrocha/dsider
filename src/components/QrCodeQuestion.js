@@ -21,7 +21,7 @@ const QrCodeQuestion = ({ userEmail }) => {
         });
 
         if (!response.ok) {
-          throw new Error('Erro ao enviar/receber dados');
+          throw new Error('Erro');
         }
         const response2 = await fetch('/api/getBaseLink', {
           method: 'POST',
@@ -38,7 +38,7 @@ const QrCodeQuestion = ({ userEmail }) => {
         generateQRCodeUrl(data2,data.id);
         console.log(data);
       } catch (error) {
-        console.error('Erro ao obter perguntas', error.message);
+        console.error('Erro:', error.message);
       }
     };
 
